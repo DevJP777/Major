@@ -66,9 +66,9 @@ async function majorBot() {
             await authData();
         }
         await authData()
-        await DailyTask();
-        await GeneralTask();
-        await RoulleteTask();
+        //await DailyTask();
+        //await GeneralTask();
+        //await RoulleteTask();
         await SwipeCoinTask();
         console.log(greenText('SwipeCoin task completed.'));
 

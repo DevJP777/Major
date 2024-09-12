@@ -72,44 +72,6 @@ const GeneralTask = async () => {
   }
 };
 
-// const startScheduledGeneralTasks = async () => {
-//   while (true) {
-//     // Jalankan semua tugas DailyTask terlebih dahulu
-//     await GeneralTask();
-
-//     // Setelah semua DailyTask selesai, baru mulai countdown
-//     let minInterval = 12 * 60 * 60 * 1000 + 10 * 60 * 1000; // 8 hours 10 minutes in milliseconds
-//     let maxInterval = 12 * 60 * 60 * 1000 + 15 * 60 * 1000; // 8 hours 15 minutes in milliseconds
-//     let randomInterval = Math.floor(Math.random() * (maxInterval - minInterval + 1)) + minInterval;
-
-//     let countdown = randomInterval;
-//     let lastUpdateTime = Date.now();
-//     let lastPrintedCountdown = countdown;
-
-//     const countdownInterval = setInterval(() => {
-//       const now = Date.now();
-//       const elapsedTime = now - lastUpdateTime;
-
-//       if (countdown <= 0) {
-//         clearInterval(countdownInterval);
-//         process.stdout.clearLine();
-//         process.stdout.cursorTo(1);
-//         console.log('Task started');
-//       } else if (elapsedTime >= 1000) { // Update every second
-//         if (countdown <= 60000 || Math.abs(countdown - lastPrintedCountdown) >= 1000) {
-//           process.stdout.clearLine(); // Hapus baris sebelumnya
-//           process.stdout.cursorTo(0); // Pindah ke posisi awal baris
-//           process.stdout.write(`\x1b[33mNext General task will Start in: ${formatTime(countdown)}\x1b[0m`);
-//           lastPrintedCountdown = countdown;
-//         }
-//         lastUpdateTime = now;
-//         countdown -= 1000; // Decrement by 1 second
-//       }
-//     }, 1000);
-
-//     await delay(randomInterval); // Delay sebelum task berikutnya dimulai
-//   }
-// };
 
 // Ekspor fungsi
 module.exports = GeneralTask ;

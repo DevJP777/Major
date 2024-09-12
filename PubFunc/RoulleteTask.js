@@ -38,7 +38,7 @@ const RoulleteTask = async () => {
                 const RoulleteTaskUrl = 'https://major.bot/api/roulette/';
                 const response = await axios.get(RoulleteTaskUrl, { headers });
                 const tasks = response.data;
-                console.log(`Tasks Roullete for user ${username}:`, tasks);
+                //console.log(`Tasks Roullete for user ${username}:`, tasks);
                 if(tasks.success === true){
                     const doRouletteHeader = {
                         'Accept': 'application/json, text/plain, */*',
@@ -59,7 +59,7 @@ const RoulleteTask = async () => {
                         let doRoulette = await axios.post(RoulleteTaskUrl, {},{headers: doRouletteHeader});
 
                         if(doRoulette.data){
-                            console.log(blueText(`${account}`),'mendapatkan ',greenText(`${doRoulette.data.rating_award}`,'MAJOR POINT dari roulette'))
+                            console.log(blueText(`${account.user.username}`),'mendapatkan ',greenText(`${doRoulette.data.rating_award}`,'MAJOR POINT dari roulette'))
                         }else{
 
                         }

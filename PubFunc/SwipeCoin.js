@@ -42,7 +42,6 @@ const SwipeCoinTask = async () => {
                 'Accept': 'application/json, text/plain, */*',
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',
-                'Content-Length': 13, // Placeholder for actual content length
                 'Origin': 'https://major.bot',
                 'Priority': 'u=1, i',
                 'Referer': 'https://major.bot/games/swipe-coin',
