@@ -79,15 +79,14 @@ async function majorBot() {
             await authData();
         }
         await authData()
-        //await DailyTask();
-        //await GeneralTask();
-        //await RoulleteTask();
+        await DailyTask();
+        await GeneralTask();
+        await RoulleteTask();
         await SwipeCoinTask();
-        //await delayWithCountdown(60000)
-        await HoldCoinTask()
         await delayWithCountdown(60000)
-        //console.log(greenText('SwipeCoin task completed.'));
-
+        await HoldCoinTask()
+        //await delayWithCountdown(60000)
+        
         // Mulai countdown untuk tugas berikutnya
         const runTasksPeriodically = async () => {
             while (true) {
@@ -102,7 +101,7 @@ async function majorBot() {
                     const remainingTime = end - Date.now();
                     const formattedRemainingTime = formatInterval(remainingTime);
                     console.clear();
-                    console.log(`BOT akan dijalankan ulang dalam waktu: ${yellowText(formattedRemainingTime)}`);
+                    console.log(`BOT AUTO AKAN DIJALANKAN ULANG DALAM WAKTU: ${yellowText(formattedRemainingTime)}`);
                     await delay(60000); // Tunggu 1 menit
                 }
 
@@ -111,11 +110,14 @@ async function majorBot() {
                 await GeneralTask();
                 await RoulleteTask();
                 await SwipeCoinTask();
+                await delayWithCountdown(60000)
+                await HoldCoinTask()
+                await delayWithCountdown(60000)
 
                 // Hitung interval acak baru untuk iterasi berikutnya
                 const newInterval = getRandomInterval(485, 495);
                 const newFormattedInterval = formatInterval(newInterval);
-                console.log(yellowText(`AUTO TASK AKAN DIJALANKAN ULANG DALAM WAKTU: ${newFormattedInterval}`));
+                console.log(yellowText(`BOT AUTO AKAN DIJALANKAN ULANG DALAM WAKTU: ${newFormattedInterval}`));
             }
         };
 
