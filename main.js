@@ -6,6 +6,7 @@ const DailyTask = require('./PubFunc/DailyTask');
 const GeneralTask = require('./PubFunc/GeneralTask');
 const RoulleteTask = require('./PubFunc/RoulleteTask');
 const SwipeCoinTask = require('./PubFunc/SwipeCoin');
+const HoldCoinTask = require('./PubFunc/HoldCoin')
 const { dailyTask, generalTask } = require('./ApiPath');
 
 // Tentukan path file JSON
@@ -17,6 +18,18 @@ const blueText = text => `\x1b[34m${text}\x1b[0m`;
 // Fungsi untuk delay
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
+const delayWithCountdown = async (ms) => {
+    let remainingTime = ms;
+    while (remainingTime > 0) {
+        const hours = Math.floor(remainingTime / 3600000);
+        const minutes = Math.floor((remainingTime % 3600000) / 60000);
+        const seconds = Math.floor((remainingTime % 60000) / 1000);
+
+        console.log(yellowText(`Task Berikutnya Akan Dijalankan Dalam ${hours} jam ${minutes} menit ${seconds} detik`));
+        await delay(1000);
+        remainingTime -= 1000;
+    }
+};
 // Fungsi untuk menghitung interval acak antara batas bawah dan batas atas dalam milidetik
 const getRandomInterval = (minMinutes, maxMinutes) => {
     const minMillis = minMinutes * 60 * 1000;
@@ -70,7 +83,10 @@ async function majorBot() {
         //await GeneralTask();
         //await RoulleteTask();
         await SwipeCoinTask();
-        console.log(greenText('SwipeCoin task completed.'));
+        //await delayWithCountdown(60000)
+        await HoldCoinTask()
+        await delayWithCountdown(60000)
+        //console.log(greenText('SwipeCoin task completed.'));
 
         // Mulai countdown untuk tugas berikutnya
         const runTasksPeriodically = async () => {
@@ -86,7 +102,7 @@ async function majorBot() {
                     const remainingTime = end - Date.now();
                     const formattedRemainingTime = formatInterval(remainingTime);
                     console.clear();
-                    console.log(`Task akan dijalankan ulang dalam waktu: ${yellowText(formattedRemainingTime)}`);
+                    console.log(`BOT akan dijalankan ulang dalam waktu: ${yellowText(formattedRemainingTime)}`);
                     await delay(60000); // Tunggu 1 menit
                 }
 
