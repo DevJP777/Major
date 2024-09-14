@@ -79,7 +79,7 @@ const SwipeCoinTask = async () => {
                         const doSwipeCoinResponse = await axios.post(SwipeCoinTaskUrl, doSwipeCoinPayload, { headers: postHeaders });
 
                         if (doSwipeCoinResponse.data) {
-                            console.log(blueText(`${username}`), 'mendapatkan', greenText('MAJOR POINT dari TASK Swipe Coin Sejumlah ', `${doSwipeCoinPayload.coins} coins`));
+                            console.log(blueText(`${username}`), 'mendapatkan', greenText(`MAJOR POINT dari TASK Swipe Coin Sejumlah ${doSwipeCoinPayload.coins} coins`));
                         } else {
                             console.log(blueText(`${username}`), 'tidak mendapatkan poin dari swipe coin');
                         }

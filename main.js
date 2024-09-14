@@ -85,8 +85,8 @@ async function majorBot() {
         await SwipeCoinTask();
         await delayWithCountdown(60000)
         await HoldCoinTask()
-        //await delayWithCountdown(60000)
-        
+        await delayWithCountdown(10000)
+
         // Mulai countdown untuk tugas berikutnya
         const runTasksPeriodically = async () => {
             while (true) {
@@ -112,7 +112,7 @@ async function majorBot() {
                 await SwipeCoinTask();
                 await delayWithCountdown(60000)
                 await HoldCoinTask()
-                await delayWithCountdown(60000)
+                //await delayWithCountdown(60000)
 
                 // Hitung interval acak baru untuk iterasi berikutnya
                 const newInterval = getRandomInterval(485, 495);

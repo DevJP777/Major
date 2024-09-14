@@ -78,21 +78,21 @@ const HoldCoinTask = async () => {
                     };
 
                     // Update content length dengan panjang payload yang sebenarnya
-                    postHeaders['Content-Length'] = Buffer.byteLength(JSON.stringify(doHoldCoinPayload));
+                    //postHeaders['Content-Length'] = Buffer.byteLength(JSON.stringify(doHoldCoinPayload));
 
                     try {
                         // Mengirimkan POST request dengan payload
                         const doHoldCoinResponse = await axios.post(HoldCoinTaskUrl, doHoldCoinPayload, { headers: postHeaders });
 
                         if (doHoldCoinResponse.data) {
-                            console.log(blueText(`${username}`), 'mendapatkan', greenText('MAJOR POINT dari TASK Hold Coin Sejumlah ', `${doHoldCoinPayload.coins? doHoldCoinPayload.coins:'885'} coins`));
+                            console.log(blueText(`${username}`), 'mendapatkan', greenText(`MAJOR POINT dari TASK Hold Coin Sejumlah  ${doHoldCoinPayload.coins? doHoldCoinPayload.coins:'885'} coins`));
                         } else {
                             console.log(blueText(`${username}`), 'tidak mendapatkan poin dari  Holdcoin');
                         }
                     } catch (postError) {
                         if (postError.response) {
                             if (postError.response.status === 400) {
-                                console.warn(`Warning for user ${username}: Swipe coin task failed with status 400.`);
+                                console.warn(`Warning for user ${username}: Hold coin task failed with status 400.`);
                             } else if (postError.response.status === 401) {
                                 console.error(`Error for user ${username}: Unauthorized - ${postError.response.message}`);
                             } else {

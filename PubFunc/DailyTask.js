@@ -2,6 +2,7 @@
 
 
 const axios = require('axios');
+const { Console } = require('console');
 const fs = require('fs');
 const path = require('path');
 
@@ -18,6 +19,7 @@ const formatTime = ms => {
 };
 
 const greenText = text => `\x1b[32m${text}\x1b[0m`;
+const blueText = text => `\x1b[34m${text}\x1b[0m`;
 const DailyTask = async () => {
   try {
     const accountListPath = path.join(__dirname, '../AccountList.json');
@@ -56,23 +58,24 @@ const DailyTask = async () => {
         //console.log(taskIds)
         if (taskIds.length > 0) {
             //console.log(taskIds)
-            console.log(`${username}: Ada ${taskIds.length} Daily tasks yang bisa di selesaikan. Memulai Menyelesaikan Task`);
+            console.log(`${blueText(username)}: Ada ${taskIds.length} Daily tasks yang bisa di selesaikan. Memulai Menyelesaikan Task`);
             //console.log(tasks)
           for (const task of taskIds) {
                 try {
                   const actionTask = await axios.post('https://major.bot/api/tasks/', { task_id: task.id }, { headers });
+                  //console.log(actionTask.data)
                   console.log(`Task: "${task.title}" processed.`);
                   console.log('\x1b[34m%s\x1b[0m', username, ': ', task.title, actionTask.data.is_completed === false ? 'Task Belum Selesai/ tidak dapat diselesaikan' : 'Task Selesai');
               } catch (actionError) {
                   if (actionError.response && actionError.response.status === 400) {
                       // Jika status adalah 400, log pesan dan lanjutkan
-                      console.warn(greenText(`for user ${username}: Daily Task "${task.title}" ALREADY COMPLETE`));
+                      console.warn(greenText(`for user ${username}: Daily Task "${task.title}" ALREADY COMPLETED`));
                   } else {
                       // Tangani kesalahan lain
                       console.error(`Error for user ${username}:`, actionError.message);
                   }
               }
-            await delay(500)
+            await delay(1000)
           }
         } else {
           console.log(`\x1b[33m Akun: ${username} No Task Found \x1b[0m`);
